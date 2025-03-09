@@ -1,0 +1,56 @@
+name: alpine mysql
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+
+    steps:
+    - name: install dependencies
+      run: |
+        apk update
+        apk add build-base \
+          cmake \
+          libaio \
+          ncurses-dev \
+          bison \
+          perl \
+          zlib-dev \
+          wget \
+          zip
+
+    - name: download mySQL source
+      run: |
+        mkdir /root/mysql
+        cd /root/mysql
+        wget https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-8.4.4.tar.gz
+        tar zxvf mysql-8.4.4.tar.gz
+
+    - name: compile mySQL
+      run: |
+        mkdir /root/m
+        mkdir /root/b
+        cd /root/m
+        cmake /root/mysql/mysql-8.4.4 -DCMAKE_INSTALL_PREFIX=/root/b
+        make
+
+    - name: Verify MySQL installation
+      run: |
+        /root/b/bin/mysqld --version
+
+    - name: Package MySQL files
+      run: |
+        cd /root
+        zip -r mysql.zip /root/b
+
+    - name: Upload MySQL build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: mysql
+        path: /root/mysql.zip
