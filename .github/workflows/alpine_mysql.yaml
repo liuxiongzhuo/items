@@ -41,7 +41,7 @@ jobs:
         mkdir /root/b
         cd /root/m
         cmake /root/mysql/mysql-8.4.4 -DCMAKE_INSTALL_PREFIX=/root/b
-        make
+        make -j$(nproc)
 
     - name: Verify MySQL installation
       run: |
