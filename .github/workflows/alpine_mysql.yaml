@@ -23,7 +23,8 @@ jobs:
           perl \
           zlib-dev \
           wget \
-          zip
+          zip \
+          openssl-dev
 
     - name: download mySQL source
       run: |
