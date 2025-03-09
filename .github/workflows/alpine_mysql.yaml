@@ -24,7 +24,8 @@ jobs:
           zlib-dev \
           wget \
           zip \
-          openssl-dev
+          openssl-dev \
+          libtirpc-dev
 
     - name: download mySQL source
       run: |
