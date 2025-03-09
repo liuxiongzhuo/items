@@ -50,7 +50,7 @@ jobs:
         zip -r mysql.zip /root/b
 
     - name: Upload MySQL build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: mysql
         path: /root/mysql.zip
