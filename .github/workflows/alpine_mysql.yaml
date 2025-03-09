@@ -25,7 +25,8 @@ jobs:
           wget \
           zip \
           openssl-dev \
-          libtirpc-dev
+          libtirpc-dev \
+          rpcsvc-proto
 
     - name: download mySQL source
       run: |
